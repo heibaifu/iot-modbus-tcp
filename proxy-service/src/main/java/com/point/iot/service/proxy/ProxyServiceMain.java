@@ -21,7 +21,6 @@ public class ProxyServiceMain {
 		} catch (Exception e) {
 			logger.error("服务启动失败!", e);
 		}
-		
     } 
     
 }

@@ -2,14 +2,17 @@ package com.point.iot.manager.core.servlet;
 
 import java.util.Map;
 
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+
 import org.apache.mina.core.session.IoSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.point.iot.base.message.TcpMessage;
+import com.point.iot.manager.core.control.ControlMessageHandler;
 import com.point.iot.manager.core.facade.MessageManagerFacade;
 import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
-import com.tongqu.base.message.shrtcp.MessageCodecFactory;
 
 public class ApplicationContextUtil {
 	
@@ -24,11 +27,18 @@ public class ApplicationContextUtil {
 		}
 	}
 	/**
-	 * 获取解码编码器的工厂类
+	 * 获取远程控制消息处理类
 	 * @return
+	 * @throws JMSException 
 	 */
-	public static Map<String, MessageCodecFactory> getMessageCodecFactory(){
-		return context.getBeansOfType(MessageCodecFactory.class);
+	public static void CallControlMessageHandler(MapMessage message) throws JMSException{
+		Map<String, ControlMessageHandler>  map = context.getBeansOfType(ControlMessageHandler.class);
+		for(Map.Entry<String, ControlMessageHandler> entry : map.entrySet()){
+			ControlMessageHandler control = entry.getValue();
+			if(message != null && control.getProtocolType().equals(message.getString("protocolType"))){
+				control.doExec(message);
+			}
+		}
 	}
 	
 	/**

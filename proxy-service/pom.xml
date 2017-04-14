@@ -22,12 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.point</groupId>
-			<artifactId>shr-tcp-module</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.point</groupId>
-			<artifactId>shr-modbus-module</artifactId>
+			<artifactId>tcp-module</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

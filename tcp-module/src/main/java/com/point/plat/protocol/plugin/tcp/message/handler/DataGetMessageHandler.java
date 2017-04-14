@@ -1,22 +1,14 @@
 package com.point.plat.protocol.plugin.tcp.message.handler;
 
 import java.nio.ByteBuffer;
-import java.sql.Connection;
-import java.sql.Timestamp;
-import java.sql.Types;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.mina.core.session.IoSession;
 import org.springframework.stereotype.Component;
 
 import com.point.iot.base.message.TcpMessage;
-import com.point.iot.base.mysql.jdbc.DBConnectionManager;
-import com.point.iot.base.mysql.jdbc.FunctionParam;
-import com.point.iot.base.mysql.jdbc.QueryHelper;
 import com.point.iot.base.tools.CommUtils;
 import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
 import com.point.plat.protocol.plugin.tcp.TcpNetCmd;

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import com.point.iot.base.message.TcpMessage;
 import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
 import com.point.plat.protocol.plugin.tcp.TcpNetCmd;
+import com.point.plat.protocol.plugin.tcp.control.SessionBean;
 import com.point.plat.protocol.plugin.tcp.model.CjyTcpMessage;
-import com.tongqu.base.message.shrtcp.SHRTcpMessage;
 /**
  * 登录处理逻辑类
  * 收到登录消息后，发送登录响应消息。同时，发送发送控制码为0x04的帧召测数据
@@ -23,6 +23,8 @@ public class LoginMessageClientHandler implements MessageManagerLogicHandler{
 	public void doExec(TcpMessage message, IoSession session) {
 		CjyTcpMessage tcpMsg = (CjyTcpMessage)message;
 		logger.debug("收到设备" + tcpMsg.getAddress() + "的登录消息" );
+		
+		SessionBean.putSession(tcpMsg.getAddress(), session);
 		//TODO 更新登录设备的状态，包括ip，在线状态等
 		//登录响应消息
 		CjyTcpMessage loginResp = new CjyTcpMessage();

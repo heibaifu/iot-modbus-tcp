@@ -31,14 +31,14 @@
 			<version>3.1.2.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tongqu</groupId>
-			<artifactId>game-manager-request-bean</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>com.googlecode.disruptor</groupId>
 			<artifactId>disruptor</artifactId>
 			<version>2.7.1</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-all</artifactId>
+		    <version>5.14.4</version>
+		</dependency>		
 	</dependencies>
 </project>

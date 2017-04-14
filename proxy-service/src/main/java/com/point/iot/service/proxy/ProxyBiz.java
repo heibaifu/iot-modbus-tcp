@@ -13,6 +13,7 @@ import com.point.iot.base.timer.TimerActionListener;
 import com.point.iot.manager.core.servlet.ApplicationContextUtil;
 import com.point.iot.mina.msg.MessageHandler;
 import com.point.iot.mina.server.SocketServer;
+import com.point.iot.service.proxy.receiver.ReceiverFactory;
 
 public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	Logger logger = Logger.getLogger(ProxyBiz.class);
@@ -38,6 +39,8 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	public void init() {
 		new SocketServer(65001, this);
 		(new Thread(this)).start();
+		//初始化消费者客户端
+		ReceiverFactory.getInstance();
 	}
 	/**
 	 * 数据通过此接口转发到各个解析模块
