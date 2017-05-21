@@ -52,7 +52,7 @@ public class EMail implements Runnable {
 				ConfigManager configManager = new ConfigManager();
 				configMap = configManager.getConfig();
 				LOCAL_IP = configMap.get("LOCAL_IP");
-				ENABLE_EMAIL = configMap.get("tongqu.enable_email");
+				ENABLE_EMAIL = configMap.get("puente.enable_email");
 			} catch (Exception e) {
 			}
 		}

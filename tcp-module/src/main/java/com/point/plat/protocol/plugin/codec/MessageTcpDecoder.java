@@ -9,8 +9,8 @@ import org.apache.mina.filter.codec.demux.MessageDecoderResult;
 import org.springframework.stereotype.Component;
 
 import com.point.iot.base.tools.CommUtils;
+import com.point.iot.base.tools.MessageUtil;
 import com.point.plat.protocol.plugin.tcp.model.CjyTcpMessage;
-import com.tongqu.base.message.shrtcp.MessageUtil;
 @Component
 public class MessageTcpDecoder implements MessageDecoder{
 	Logger logger = Logger.getLogger(MessageTcpDecoder.class) ;
