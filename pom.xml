@@ -16,7 +16,6 @@
 		<module>iot-manager-core</module>
 		<module>proxy-service</module>
 		<module>tcp-module</module>
-		<module>shr-modbus-module</module>
 	</modules>
 
 	<dependencies>
