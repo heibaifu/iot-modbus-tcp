@@ -20,7 +20,6 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 
 	private static ProxyBiz mInstance;
 	// 全局配置参数表
-	public static Map<String, String> mConfigMap;
 	/**
 	 * Manager的DB服务
 	 */
@@ -98,15 +97,12 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 			if (n2 == 0) n2 = 1;
 			int nPercent = (int) (100 * n1 / n2);
 			logger.info("“" + path + "”分区剩余磁盘空间：" + nPercent + "% [" + n1 + "m/" + n2 + "m]");
-			if ("127.0.0.1".equals(mConfigMap.get("LOCAL_IP"))) {
-				return;
-			}
 			if (nPercent < warningPercent) {
-				String sContent = mConfigMap.get("LOCAL_IP") + "硬盘“" + path + "”分区可用空间低于"
+				String sContent =  "硬盘“" + path + "”分区可用空间低于"
 						+ nPercent + "% [" + n1 + "m/" + n2 + "m]，请服务器相关同学处理一下。（本邮件将在5分钟后再次发送）";
 				EMail email = new EMail(
 						new String[] { "server_watcher@puente.cn" },
-						mConfigMap.get("LOCAL_IP") + "硬盘“" + path + "”分区可用空间低于" + nPercent
+						"硬盘“" + path + "”分区可用空间低于" + nPercent
 								+ "%", sContent);
 				email.send();
 			}
