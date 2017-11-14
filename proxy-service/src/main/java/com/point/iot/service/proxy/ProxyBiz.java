@@ -39,7 +39,7 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 		new SocketServer(65001, this);
 		(new Thread(this)).start();
 		//初始化消费者客户端
-		ReceiverFactory.getInstance();
+//		ReceiverFactory.getInstance();
 	}
 	/**
 	 * 数据通过此接口转发到各个解析模块

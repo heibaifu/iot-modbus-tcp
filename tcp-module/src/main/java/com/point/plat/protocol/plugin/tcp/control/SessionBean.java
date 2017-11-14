@@ -1,12 +1,13 @@
 package com.point.plat.protocol.plugin.tcp.control;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.mina.core.session.IoSession;
 
 public class SessionBean {
 
-	private static Map<Integer, IoSession> sessionMap;
+	private static Map<Integer, IoSession> sessionMap = new HashMap<Integer, IoSession>();
 	/**
 	 * 管理session
 	 * @param code
