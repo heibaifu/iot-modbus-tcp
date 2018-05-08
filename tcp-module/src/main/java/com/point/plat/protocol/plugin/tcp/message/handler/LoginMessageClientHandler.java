@@ -8,7 +8,6 @@ import com.point.iot.base.message.TcpMessage;
 import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
 import com.point.plat.protocol.plugin.tcp.TcpNetCmd;
 import com.point.plat.protocol.plugin.tcp.model.CjyTcpMessage;
-import com.tongqu.base.message.shrtcp.SHRTcpMessage;
 /**
  * 登录处理逻辑类
  * 收到登录消息后，发送登录响应消息。同时，发送发送控制码为0x04的帧召测数据
