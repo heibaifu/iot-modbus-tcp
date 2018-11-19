@@ -49,6 +49,27 @@ public class CommUtils {
 	static Logger logger = Logger.getLogger(CommUtils.class);
 
 	public static final boolean DEPLOY_SERVER = !((System.getProperties().getProperty("os.name")).indexOf("Windows")>=0);
+    /**
+     * byte[] to Hex string.
+     *
+     * @param byteArray the byte array
+     * @return the string
+     */
+
+    public static String toHexString(byte[] byteArray) {
+        final StringBuilder hexString = new StringBuilder("");
+        if (byteArray == null || byteArray.length <= 0)
+            return null;
+        for (int i = 0; i < byteArray.length; i++) {
+            int v = byteArray[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                hexString.append(0);
+            }
+            hexString.append(hv);
+        }
+        return hexString.toString().toLowerCase();
+    }
 	/**
 	 * int转byte
 	 * @param value

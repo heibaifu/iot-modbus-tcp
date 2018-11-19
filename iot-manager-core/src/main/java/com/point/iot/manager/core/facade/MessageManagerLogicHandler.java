@@ -2,7 +2,7 @@ package com.point.iot.manager.core.facade;
 
 import org.apache.mina.core.session.IoSession;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.TcpMessageResp;
 
 
 /**
@@ -10,6 +10,10 @@ import com.point.iot.base.message.TcpMessage;
  * 
  */
 public interface MessageManagerLogicHandler {
-
-	void doExec(TcpMessage message, IoSession session);
+	/**
+	 * 返回为null 表示无需响应客户端
+	 * @param session
+	 * @return
+	 */
+	TcpMessageResp doExec(IoSession session);
 }

@@ -13,7 +13,6 @@ import com.point.iot.base.timer.TimerActionListener;
 import com.point.iot.manager.core.servlet.ApplicationContextUtil;
 import com.point.iot.mina.msg.MessageHandler;
 import com.point.iot.mina.server.SocketServer;
-import com.point.iot.service.proxy.receiver.ReceiverFactory;
 
 public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	Logger logger = Logger.getLogger(ProxyBiz.class);
@@ -23,7 +22,8 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	/**
 	 * Manager的DB服务
 	 */
-
+	private Map<Long, IoSession> sessionMap;
+	
 	public synchronized static ProxyBiz getInst() {
 		if (mInstance == null) {
 			ApplicationContextUtil.registor();
@@ -36,7 +36,8 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	}
 	
 	public void init() {
-		new SocketServer(65001, this);
+		SocketServer socketServer = new SocketServer(65001, this);
+		sessionMap = socketServer.getManagedSessions();
 		(new Thread(this)).start();
 		//初始化消费者客户端
 //		ReceiverFactory.getInstance();
@@ -70,7 +71,9 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 			try {
 				Thread.sleep(1000);
 				ActionManager.getInstance().run();
-
+				if ( sessionMap != null ){
+					logger.info("当前连接的客户端数为：" + sessionMap.size());
+				}
 				// 检查磁盘空间
 				if (System.currentTimeMillis() - nLastCheckDiskTime > 5 * 60000) {
 					checkDiskSpace("/", 50);

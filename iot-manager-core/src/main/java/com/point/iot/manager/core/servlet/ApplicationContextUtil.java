@@ -11,8 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.point.iot.base.message.TcpMessage;
 import com.point.iot.manager.core.control.ControlMessageHandler;
+import com.point.iot.manager.core.facade.MessageDistributorFacade;
+import com.point.iot.manager.core.facade.MessageDistributorLogicHandler;
 import com.point.iot.manager.core.facade.MessageManagerFacade;
-import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
 
 public class ApplicationContextUtil {
 	
@@ -47,12 +48,12 @@ public class ApplicationContextUtil {
 	 * @param session
 	 */
 	public  static void callIotRequestProvider(TcpMessage message, IoSession session){
-		MessageManagerLogicHandler handler = null;
-		Map<String, MessageManagerFacade> map = context.getBeansOfType(MessageManagerFacade.class);
-		for(Map.Entry<String, MessageManagerFacade> entry : map.entrySet()){
-			MessageManagerFacade facade = entry.getValue();
+		MessageDistributorLogicHandler handler = null;
+		Map<String, MessageDistributorFacade> map = context.getBeansOfType(MessageDistributorFacade.class);
+		for(Map.Entry<String, MessageDistributorFacade> entry : map.entrySet()){
+			MessageDistributorFacade facade = entry.getValue();
 			if(facade.getFacadeMap() != null){
-				handler = (MessageManagerLogicHandler) facade.getFacadeMap().get(message.getProtocolType());
+				handler = (MessageDistributorLogicHandler) facade.getFacadeMap().get(message.getProtocolType());
 				if(handler != null){
 					 handler.doExec(message, session);
 				}
