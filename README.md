@@ -1,3 +1,10 @@
+v2 版本说明：
+
+1. 增加根据requestBean注解自动解析Tcp包
+2. 增加自动封装响应包
+3. 包格式 4位协议簇+4位命令号+包体 ，参考login协议。若包格式不同，自定义编解码器。
+4. 增加sessionMap， 用于管理客户端session
+5. V2版本采用AGPL开源协议
 
 
 轻型高性能物联网通信框架，适用于多种场景；支持TCP通讯方式。 
@@ -37,9 +44,4 @@ QQ群：157973669
      INFO [TcpMessageFacade.java:34] - ====================TcpMessageFacade Registry=======================
      INFO [SocketServer.java:51] - 服务器启动正常，监听端口 65001
 ```
-v2 版本说明
-1. 增加根据requestBean注解自动解析Tcp包
-2. 增加自动封装响应包
-3. 包格式 4位协议簇+4位命令号+包体 ，参考login协议。若包格式不同，自定义编解码器。
-4. 增加sessionMap， 用于管理客户端session
 	
