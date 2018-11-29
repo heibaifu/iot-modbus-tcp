@@ -28,7 +28,7 @@ public class LoginMessageClientHandler implements MessageManagerLogicHandler{
 		logger.info("收到设备" + loginRequestBean.getDeviceId() + "的登录消息" );
 		LoginResponseBean loginResponseBean = new LoginResponseBean();
 		loginResponseBean.setProtocolType(loginRequestBean.getProtocolType());
-		loginResponseBean.setCmd(loginRequestBean.getCmd()|0xFF00);
+		loginResponseBean.setCmd(loginRequestBean.getCmd());
 		loginResponseBean.setDeviceType(loginRequestBean.getDeviceType());
 		loginResponseBean.setDeviceId(loginRequestBean.getDeviceId());
 		return loginResponseBean;

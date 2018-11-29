@@ -1,10 +1,10 @@
 package com.point.iot.base.message;
 
-import org.apache.mina.core.buffer.IoBuffer;
+import java.util.Map;
 
-import com.point.iot.utils.Constant;
+import org.apache.mina.core.session.IoSession;
 
-public class TcpMessageResp {
+public class PointMessage {
 	
 	//协议类型
 	private byte protocolType;
@@ -13,6 +13,8 @@ public class TcpMessageResp {
 	private byte cmd;
 	
 	private byte[] data;
+	//在線設備session
+	private Map<Long, IoSession> sessionMap;
 	
 	public byte[] getData() {
 		return data;
@@ -30,14 +32,13 @@ public class TcpMessageResp {
 		return protocolType;
 	}
 	public void setProtocolType(byte protocolType) {
-		this.protocolType = Constant.CAIJIYI_TCP;
+		this.protocolType = protocolType;
+	}
+	public Map<Long, IoSession> getSessionMap() {
+		return sessionMap;
+	}
+	public void setSessionMap(Map<Long, IoSession> sessionMap) {
+		this.sessionMap = sessionMap;
 	}
 	
-	public IoBuffer encode(){
-		IoBuffer buf = IoBuffer.allocate(10);
-		buf.putInt(this.protocolType);
-		buf.putInt(this.cmd);
-		buf.flip();
-		return buf;
-	}
 }

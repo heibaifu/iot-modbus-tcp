@@ -7,5 +7,5 @@ import java.util.Map;
  * 
  */
 public interface MessageManagerFacade {
-	Map<Integer, MessageManagerLogicHandler> getFacadeMap();
+	Map<Byte, MessageManagerLogicHandler> getFacadeMap();
 }

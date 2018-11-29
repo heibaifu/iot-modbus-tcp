@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.point.iot.base.message.MessageCodecRegister;
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.manager.core.facade.MessageManagerFacade;
 import com.point.iot.manager.core.facade.MessageManagerLogicHandler;
 import com.point.plat.protocol.plugin.codec.MessageTcpDecoder;
@@ -21,22 +21,22 @@ import com.point.plat.protocol.plugin.tcp.TcpNetCmd;
 public class TcpMessageFacade implements MessageManagerFacade {
 	Logger logger = Logger.getLogger(TcpMessageFacade.class);
 
-	private Map<Integer, MessageManagerLogicHandler> facadeMap = new HashMap<Integer, MessageManagerLogicHandler>();
+	private Map<Byte, MessageManagerLogicHandler> facadeMap = new HashMap<Byte, MessageManagerLogicHandler>();
 	@Resource(type = LoginMessageClientHandler.class)
 	private LoginMessageClientHandler loginMessageClientHandler;
 	
 	@PostConstruct
 	public void registry() {
-		logger.info("====================TcpMessageFacade Registry=======================");
+		logger.info("====================TCPMessageFacade Registry=======================");
 		//注册解码器及编码器
-		MessageCodecRegister.addEncoder(TcpMessage.class, new MessageTcpEncoder());
-		MessageCodecRegister.addDecoder(TcpMessage.class, new MessageTcpDecoder());
+		MessageCodecRegister.addEncoder(PointMessage.class, new MessageTcpEncoder());
+		MessageCodecRegister.addDecoder(PointMessage.class, new MessageTcpDecoder());
 		// TCP协议解析组件
 		this.facadeMap.put(TcpNetCmd.LOGIN_ID, loginMessageClientHandler);
 	}
 
 	@Override
-	public Map<Integer, MessageManagerLogicHandler> getFacadeMap() {
+	public Map<Byte, MessageManagerLogicHandler> getFacadeMap() {
 		return facadeMap;
 	}
 

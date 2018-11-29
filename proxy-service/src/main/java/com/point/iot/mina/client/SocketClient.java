@@ -14,7 +14,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.mina.codc.factory.MessageCodecFactory;
 import com.point.iot.mina.msg.MsgHandler;
 
@@ -34,7 +34,7 @@ public class SocketClient implements Runnable {
 	//
 	private ClientHandler mClientHandler;
 	//发送消息的队列
-	private final Queue<TcpMessage> mSendingQueue = new ConcurrentLinkedQueue<TcpMessage>();
+	private final Queue<PointMessage> mSendingQueue = new ConcurrentLinkedQueue<PointMessage>();
 	//是否握手成功
 	private boolean mHandShakeCompleted;
 	//握手消息ID
@@ -206,7 +206,7 @@ public class SocketClient implements Runnable {
 		}
 		while (!mSendingQueue.isEmpty()) {
 			//如果握手完成
-			TcpMessage message = mSendingQueue.poll();
+			PointMessage message = mSendingQueue.poll();
 			mFuture.getSession().write(message);
 		}
 	}
@@ -232,7 +232,7 @@ public class SocketClient implements Runnable {
 	 * 发送消息包
 	 * @param pack
 	 */
-	public void send(TcpMessage message) {
+	public void send(PointMessage message) {
 		try {
 			if (mFuture != null && mFuture.isConnected()) {
 				//如果连接正常，则直接发送

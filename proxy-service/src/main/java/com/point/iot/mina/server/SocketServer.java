@@ -44,7 +44,6 @@ public class SocketServer {
 				new ExecutorFilter(threadPool));*/
 		acceptor.getFilterChain().addLast("codec",//解码\转码
 				new ProtocolCodecFilter(new MessageCodecFactory(Charset.forName("UTF-8"))));
-
 		try {
 			// 绑定端口
 			acceptor.bind(new InetSocketAddress(port));

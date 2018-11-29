@@ -1,9 +1,9 @@
 package com.point.plat.protocol.plugin.tcp.model;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.manager.core.annotation.ID;
 
-public class LoginRequestBean extends TcpMessage{
+public class LoginRequestBean extends PointMessage{
 	/**
 	 * 设备类型
 	 */

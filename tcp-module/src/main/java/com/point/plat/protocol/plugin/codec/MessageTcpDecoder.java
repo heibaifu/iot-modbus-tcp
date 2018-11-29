@@ -8,24 +8,33 @@ import org.apache.mina.filter.codec.demux.MessageDecoder;
 import org.apache.mina.filter.codec.demux.MessageDecoderResult;
 import org.springframework.stereotype.Component;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.base.tools.MessageUtil;
+import com.point.iot.utils.Constant;
 @Component
 public class MessageTcpDecoder implements MessageDecoder{
 	Logger logger = Logger.getLogger(MessageTcpDecoder.class) ;
 	@Override
 	public MessageDecoderResult decodable(IoSession session, IoBuffer buf) {
+		int len = buf.remaining();
+		byte protocolType = buf.get();
+		if ( protocolType != Constant.CAIJIYI_TCP) {
+			return MessageDecoderResult.NOT_OK;
+		}
+		if ( len< 2) {
+			return MessageDecoderResult.NEED_DATA;
+		}
 		return MessageDecoderResult.OK;
 	}
 
 	@Override
 	public MessageDecoderResult decode(IoSession session, IoBuffer buf, ProtocolDecoderOutput out) throws Exception {
-		TcpMessage message = new TcpMessage();
+		PointMessage message = new PointMessage();
 		logger.info("收到上行消息" + buf.getHexDump());
 		//协议簇
-		message.setProtocolType(buf.getInt());
+		message.setProtocolType(buf.get());
 		//命令号
-		message.setCmd(buf.getInt());
+		message.setCmd(buf.get());
 		int len = buf.remaining();
 		//数据体
 		byte[] data = MessageUtil.getBytes(buf, len);

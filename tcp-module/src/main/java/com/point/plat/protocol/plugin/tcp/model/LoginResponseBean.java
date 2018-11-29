@@ -14,6 +14,9 @@ public class LoginResponseBean extends TcpMessageResp{
 	 */
 	@ID(order=2, lenth=4, dataType="int")
 	private int deviceId;
+	
+
+	
 	public byte getDeviceType() {
 		return deviceType;
 	}

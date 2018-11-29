@@ -9,11 +9,10 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.manager.core.control.ControlMessageHandler;
 import com.point.iot.manager.core.facade.MessageDistributorFacade;
 import com.point.iot.manager.core.facade.MessageDistributorLogicHandler;
-import com.point.iot.manager.core.facade.MessageManagerFacade;
 
 public class ApplicationContextUtil {
 	
@@ -47,7 +46,7 @@ public class ApplicationContextUtil {
 	 * @param message
 	 * @param session
 	 */
-	public  static void callIotRequestProvider(TcpMessage message, IoSession session){
+	public  static void callIotRequestProvider(PointMessage message, IoSession session){
 		MessageDistributorLogicHandler handler = null;
 		Map<String, MessageDistributorFacade> map = context.getBeansOfType(MessageDistributorFacade.class);
 		for(Map.Entry<String, MessageDistributorFacade> entry : map.entrySet()){

@@ -11,7 +11,7 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.springframework.stereotype.Component;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.base.message.TcpMessageResp;
 import com.point.iot.base.tools.CommUtils;
 import com.point.iot.manager.core.annotation.ID;
@@ -28,11 +28,11 @@ public class TcpMessageHandler implements MessageDistributorLogicHandler {
 	@Resource(type = TcpMessageFacade.class)
 	private TcpMessageFacade facade;
 	
-	public void doExec(TcpMessage message, IoSession session) {
+	public void doExec(PointMessage message, IoSession session) {
 		handleMsgPack(message, session); 
 	}
 	
-	public void handleMsgPack(TcpMessage message, IoSession session){
+	public void handleMsgPack(PointMessage message, IoSession session){
 		if(facade.getFacadeMap() != null){
 			MessageManagerLogicHandler handler = (MessageManagerLogicHandler) facade.getFacadeMap().get(message.getCmd());
 			
@@ -98,13 +98,13 @@ public class TcpMessageHandler implements MessageDistributorLogicHandler {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	public void parse(MessageManagerLogicHandler handler, TcpMessage message) throws InstantiationException, IllegalAccessException{
+	public void parse(MessageManagerLogicHandler handler, PointMessage message) throws InstantiationException, IllegalAccessException{
 		Field[] fields = handler.getClass().getDeclaredFields();
 		Class clazz = null;
 		Field dataObj = null;
 		for(Field field : fields){
 			Class<?> superClass = field.getType().getSuperclass();
-			if (superClass == TcpMessage.class){
+			if (superClass == PointMessage.class){
 				clazz = field.getType();
 				dataObj = field;
 				break;
@@ -178,5 +178,5 @@ public class TcpMessageHandler implements MessageDistributorLogicHandler {
         });
 		return fields;  
 	}
-        
+
 }

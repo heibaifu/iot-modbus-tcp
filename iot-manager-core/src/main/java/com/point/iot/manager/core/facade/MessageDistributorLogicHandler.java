@@ -2,7 +2,7 @@ package com.point.iot.manager.core.facade;
 
 import org.apache.mina.core.session.IoSession;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 
 
 /**
@@ -11,5 +11,5 @@ import com.point.iot.base.message.TcpMessage;
  */
 public interface MessageDistributorLogicHandler {
 
-	void doExec(TcpMessage message, IoSession session);
+	void doExec(PointMessage message,IoSession session);
 }

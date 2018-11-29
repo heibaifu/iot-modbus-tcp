@@ -7,12 +7,13 @@ import org.apache.log4j.Logger;
 import org.apache.mina.core.session.IoSession;
 
 import com.point.iot.base.email.EMail;
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.base.timer.ActionManager;
 import com.point.iot.base.timer.TimerActionListener;
 import com.point.iot.manager.core.servlet.ApplicationContextUtil;
 import com.point.iot.mina.msg.MessageHandler;
 import com.point.iot.mina.server.SocketServer;
+import com.point.iot.utils.Constant;
 
 public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	Logger logger = Logger.getLogger(ProxyBiz.class);
@@ -46,7 +47,10 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 	 * 数据通过此接口转发到各个解析模块
 	 */
 	@Override
-	public void onMsg(TcpMessage message, IoSession session) {
+	public void onMsg(PointMessage message, IoSession session) {
+		if( message.getProtocolType() == Constant.ADMIN_TCP) {
+			message.setSessionMap(sessionMap);
+		}
 		ApplicationContextUtil.callIotRequestProvider(message, session);
 	}
 
@@ -120,4 +124,8 @@ public class ProxyBiz implements MessageHandler, TimerActionListener, Runnable {
 
 	}
 
+	public Map<Long, IoSession> getSessionMap() {
+		return sessionMap;
+	}
+	
 }

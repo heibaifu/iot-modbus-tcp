@@ -16,6 +16,7 @@
 		<module>iot-manager-core</module>
 		<module>proxy-service</module>
 		<module>tcp-module</module>
+		<module>admin-module</module>
 	</modules>
 
 	<dependencies>

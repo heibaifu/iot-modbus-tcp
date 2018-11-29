@@ -9,7 +9,7 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import com.point.iot.base.email.EMail;
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.base.tools.CommUtils;
 import com.point.iot.mina.msg.MsgHandler;
 
@@ -44,18 +44,18 @@ public class ClientHandler extends IoHandlerAdapter {
 
 	private long mnLastErrEmailTime;
 	private StringBuffer msbErrMsg = new StringBuffer();
-	private TcpMessage mLastPack;
+	private PointMessage mLastPack;
 	private boolean wrongMsgID = false;
 	
 	public void messageReceived(IoSession session, Object msg) throws Exception {
 		if (mMsgHandler == null) {
 			return;
 		}
-		if (!(msg instanceof TcpMessage)) {
+		if (!(msg instanceof PointMessage)) {
 			logger.debug("msg is not JMessageProtocalReq" + msg);
 			return; 
 		}
-		TcpMessage messageProtocal = (TcpMessage) msg;
+		PointMessage messageProtocal = (PointMessage) msg;
 		/*if (messageProtocal.getCmd() == 0x80000000) {
 			//如果是心跳应答
 			return;

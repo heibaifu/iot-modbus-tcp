@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.point.iot.manager.core.facade.MessageDistributorFacade;
 import com.point.iot.manager.core.facade.MessageDistributorLogicHandler;
-import com.point.plat.protocol.plugin.utils.Constant;
+import com.point.iot.utils.Constant;
 
 @Component
 public class TcpProtocolFacade implements MessageDistributorFacade {
 
-	private Map<Integer, MessageDistributorLogicHandler> facadeMap = new HashMap<Integer, MessageDistributorLogicHandler>();
+	private Map<Byte, MessageDistributorLogicHandler> facadeMap = new HashMap<Byte, MessageDistributorLogicHandler>();
 
 	@Autowired
 	private TcpMessageHandler tcpMessageHandler;
@@ -26,7 +26,7 @@ public class TcpProtocolFacade implements MessageDistributorFacade {
 		facadeMap.put(Constant.CAIJIYI_TCP, tcpMessageHandler);
 	}
 
-	public Map<Integer, MessageDistributorLogicHandler> getFacadeMap() {
+	public Map<Byte, MessageDistributorLogicHandler> getFacadeMap() {
 		return facadeMap;
 	}
 

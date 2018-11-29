@@ -2,10 +2,10 @@ package com.point.iot.mina.msg;
 
 import org.apache.mina.core.session.IoSession;
 
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 
 public interface MessageHandler {
-	public void onMsg(TcpMessage messageReq, IoSession session);
+	public void onMsg(PointMessage messageReq, IoSession session);
 	public void onSessionClosed(IoSession session);
 	/**
 	 * 握手成功

@@ -8,5 +8,5 @@ import java.util.Map;
  * 
  */
 public interface MessageDistributorFacade {
-	Map<Integer, MessageDistributorLogicHandler> getFacadeMap();
+	Map<Byte, MessageDistributorLogicHandler> getFacadeMap();
 }

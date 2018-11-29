@@ -12,7 +12,7 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import com.point.iot.base.email.EMail;
-import com.point.iot.base.message.TcpMessage;
+import com.point.iot.base.message.PointMessage;
 import com.point.iot.base.tools.CommUtils;
 import com.point.iot.mina.msg.MessageHandler;
 
@@ -39,26 +39,21 @@ public class ServerHandler extends IoHandlerAdapter {
 	private StringBuffer msbErrMsg = new StringBuffer();
 	
 	public void messageReceived(IoSession session, Object msg) throws Exception {
-		if (!(msg instanceof TcpMessage)) {
-			System.out.println("msg is not AbstractMessageProtocal" + msg);
+		if (!(msg instanceof PointMessage)) {
+			logger.error("msg is not AbstractMessageProtocal" + msg);
 			return;
 		}
-		TcpMessage messageReq = (TcpMessage) msg;
-		if (messageReq.getCmd() == 0) {
-			messageHandler.onMsg(messageReq, session);
-			return;
-		}
-		int userID = 0;
+
+		PointMessage messageReq = (PointMessage) msg;
 		try {
-			
 			messageHandler.onMsg(messageReq, session);
 		} catch (Exception e) {
-			logger.fatal(messageHandler + "的onMsg()函数出现异常 " + e + "[UserID:" + userID + "]", e);
+			logger.fatal(messageHandler + "的onMsg()函数出现异常 ", e);
 			e.printStackTrace();
 			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer));
 			
-			msbErrMsg.append("\n[" + CommUtils.parseDate(System.currentTimeMillis()) + "]" + messageHandler + "异常 " + e + "[UserID:" + userID + "][MsgID:" + messageReq.getCmd() + "]");
+			msbErrMsg.append("\n[" + CommUtils.parseDate(System.currentTimeMillis()) + "]" + messageHandler + "异常 " + e  + "[MsgID:" + messageReq.getCmd() + "]");
 			msbErrMsg.append("\n=========================\n");
 			msbErrMsg.append(writer.getBuffer().toString());
 			if (System.currentTimeMillis() - mnLastErrEmailTime > 60000) {
@@ -106,7 +101,7 @@ public class ServerHandler extends IoHandlerAdapter {
 			session.closeOnFlush();
     	}
 	}
-	public   String format(long time) {
+	public String format(long time) {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms").format(new Date(time));
 	}
 }
