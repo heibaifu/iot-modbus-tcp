@@ -37,5 +37,6 @@ QQ群：157973669
      INFO [TcpMessageFacade.java:34] - ====================TcpMessageFacade Registry=======================
      INFO [SocketServer.java:51] - 服务器启动正常，监听端口 65001
 ```
-	
+5. 使用tcp测试工具 发送消息68 14 00 00 68 80 00 64 16 
+
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1120/181616_3337bfea_1302604.png "屏幕截图.png")
