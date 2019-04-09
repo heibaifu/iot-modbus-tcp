@@ -43,4 +43,3 @@ QQ群：157973669
 
 6. 演示地址：
     [后台管理端](https://gitee.com/pointiot/iot-remote)
-    [服务端地址](http://biding.wzhapp.com:8080)
